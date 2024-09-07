@@ -1,38 +1,39 @@
-function pesquisar() {
-    let section = document.getElementById("resultados-pesquisa") //acessar as coisas do documento html: document
+// app.js
+import { dadosLivros } from './dados.js';
 
-    let campoPesquisa = document.getElementById("campo-pesquisa").value
+let indexAtual = 0;
 
-    if (!campoPesquisa) {
-        section.innerHTML = "<p>Nada foi encontrado</p>"
-        return 
+document.getElementById("prev-livro").addEventListener("click", () => {
+    indexAtual = (indexAtual === 0) ? dadosLivros.length - 1 : indexAtual - 1;
+    mostrarLivro();
+});
+
+document.getElementById("next-livro").addEventListener("click", () => {
+    indexAtual = (indexAtual === dadosLivros.length - 1) ? 0 : indexAtual + 1;
+    mostrarLivro();
+});
+
+document.getElementById("btn-pesquisa").addEventListener("click", () => {
+    const termoPesquisa = document.getElementById("input-pesquisa").value.toLowerCase();
+    const livroEncontrado = dadosLivros.find(livro => livro.titulo.toLowerCase().includes(termoPesquisa));
+
+    if (livroEncontrado) {
+        indexAtual = dadosLivros.indexOf(livroEncontrado);
+        mostrarLivro();
+    } else {
+        alert("Livro não encontrado!");
     }
+});
 
-    campoPesquisa = campoPesquisa.toLowerCase()
-
-    let resultados= "";
-    let titulo = "";
-    let resumo = "";
-
-    for(let dado of dados) {
-        titulo = dado.titulo.toLowerCase()
-        resumo = dado.resumo.toLowerCase()
-        if (titulo.includes(campoPesquisa) || resumo.includes(campoPesquisa)) {
-            resultados += `<div class="item-resultado">
-                    <h2>
-                        <a href= "#" target="_blank" >${dado.titulo}</a> 
-                    </h2>
-                    <p>${dado.escritor}</p>
-                    <p>${dado.genero}</p>
-                    <p class="descricao-meta">${dado.resumo}</p>
-                    <p>${dado.estrelas}</p>
-                    </div>`;
-        } 
-    }
-
-    if(!resultados) {
-        resultados = "<p>Nada foi encontrado</p>"
-    }
-
-    section.innerHTML= resultados;
+function mostrarLivro() {
+    const livro = dadosLivros[indexAtual];
+    document.getElementById("titulo-livro").innerText = livro.titulo;
+    document.getElementById("escritor-livro").innerText = livro.escritor;
+    document.getElementById("data-finalizada").innerText = livro.dataFinalizada;
+    document.getElementById("nota-livro").innerText = livro.nota;
+    document.getElementById("personagens-favoritos").innerText = livro.personagensFavoritos;
+    document.getElementById("frases-favoritas").innerText = livro.frasesFavoritas;
 }
+
+// Inicializa com o primeiro livro
+mostrarLivro();
