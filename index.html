@@ -1,32 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"
-    <title>Biblioteca Virtual</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Diário de Leitura</title>
 </head>
-
 <body>
     <header>
-        <h1>Bem Vindo, Leitor!</h1>
+        <div class="header-container">
+            <h1>Meu Diário de Leitura</h1>
+            <div class="pesquisa-livro">
+                <input type="text" id="input-pesquisa" placeholder="O que procuras?">
+                <button id="btn-pesquisa">Search</button>
+            </div>
+        </div>
     </header>
     <main>
-        <section>
-            <input type="text" placeholder="O que procuras?" id="campo-pesquisa">
-            <button onclick="pesquisar()">Search</button>
-        </section>
-        <section class="resultados-pesquisa" id="resultados-pesquisa">
+        <section id="diario-leitura">
+            <div class="navegacao" style="margin-right: 20px;">
+                <button id="prev-livro" class="nav-btn">◀</button>
+            </div>
+
+            <div class="conteudo">
+                <div class="info-livro">
+                    <h2 id="titulo-livro">Título do Livro</h2>
+                    <p><strong>Escritor:</strong> <span id="escritor-livro">Nome do escritor</span></p>
+                    <p><strong>Data finalizada:</strong> <span id="data-finalizada">DD/MM/AAAA</span></p>
+                    <p><strong>Nota:</strong> <span id="nota-livro">☆☆☆☆☆</span></p>
+                    <p><strong>Personagens favoritos:</strong> <span id="personagens-favoritos">Nome dos personagens</span></p>
+                    <p><strong>Frase favorita:</strong> <span id="frases-favoritas">"Frase marcante do livro"</span></p>
+                </div>
+            </div>
+
+            <div class="navegacao" style="margin-left: 20px;">
+                <button id="next-livro" class="nav-btn">▶</button>
+            </div>
         </section>
     </main>
     <footer>
-        <p>Biblioteca da luiza</p>
-        <p>Downloads liberados!</p>
+        <p>&copy; 2024 Diário de Leitura. Criado com amor por Luiza.</p>
+        <p>"Um leitor vive mil vidas antes de morrer. Quem nunca lê vive apenas uma." – George R. R. Martin</p>
     </footer>
-    <script src="dados.js"></script>
-    <script src="app.js"></script>
+
+    <script type="module" src="dados.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
-
-
 </html>
